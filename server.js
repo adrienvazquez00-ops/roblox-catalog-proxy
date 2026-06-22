@@ -43,7 +43,7 @@ app.get('/catalog/search', async (req, res) => {
 // directo de Roblox, para no depender de números desactualizados de foros viejos.
 app.get('/catalog/categories', async (req, res) => {
 	try {
-		const response = await fetch('https://catalog.roblox.com/v1/search/items/category-mappings', {
+		const response = await fetch('https://catalog.roblox.com/v1/categories', {
 			headers: { 'Accept': 'application/json' }
 		});
 		const data = await response.json();
@@ -56,7 +56,7 @@ app.get('/catalog/categories', async (req, res) => {
 
 app.get('/catalog/subcategories', async (req, res) => {
 	try {
-		const response = await fetch('https://catalog.roblox.com/v1/search/items/subcategory-mappings', {
+		const response = await fetch('https://catalog.roblox.com/v1/subcategories', {
 			headers: { 'Accept': 'application/json' }
 		});
 		const data = await response.json();
