@@ -39,6 +39,34 @@ app.get('/catalog/search', async (req, res) => {
 	}
 });
 
+// Endpoint de diagnóstico: devuelve las categorías y subcategorías válidas actuales,
+// directo de Roblox, para no depender de números desactualizados de foros viejos.
+app.get('/catalog/categories', async (req, res) => {
+	try {
+		const response = await fetch('https://catalog.roblox.com/v1/search/items/category-mappings', {
+			headers: { 'Accept': 'application/json' }
+		});
+		const data = await response.json();
+		res.json(data);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal proxy error' });
+	}
+});
+
+app.get('/catalog/subcategories', async (req, res) => {
+	try {
+		const response = await fetch('https://catalog.roblox.com/v1/search/items/subcategory-mappings', {
+			headers: { 'Accept': 'application/json' }
+		});
+		const data = await response.json();
+		res.json(data);
+	} catch (err) {
+		console.error(err);
+		res.status(500).json({ error: 'Internal proxy error' });
+	}
+});
+
 // Endpoint de salud, para confirmar que el servidor está vivo
 app.get('/', (req, res) => {
 	res.send('Proxy de catálogo Roblox funcionando correctamente.');
