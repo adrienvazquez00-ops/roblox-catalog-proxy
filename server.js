@@ -28,7 +28,14 @@ app.get('/catalog/search', async (req, res) => {
 		});
 
 		if (!response.ok) {
-			return res.status(response.status).json({ error: 'Roblox catalog request failed', status: response.status });
+			const errorBody = await response.text();
+			console.error('Roblox respondió con error:', response.status, errorBody);
+			return res.status(response.status).json({
+				error: 'Roblox catalog request failed',
+				status: response.status,
+				robloxMessage: errorBody,
+				requestedUrl: targetUrl
+			});
 		}
 
 		const data = await response.json();
