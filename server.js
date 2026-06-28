@@ -18,7 +18,7 @@ app.get('/catalog/search', async (req, res) => {
 		if (subcategory) params.append('Subcategory', subcategory);
 		if (keyword) params.append('Keyword', keyword);
 		params.append('Limit', limit || '30');
-		params.append('SortType', '3'); // 3 = más relevante/popular
+		params.append('SortType', '6'); // 6 = RecentlyCreated (más variedad que MostFavorited/Price)
 		if (cursor) params.append('Cursor', cursor);
 
 		const targetUrl = `https://catalog.roblox.com/v1/search/items/details?${params.toString()}`;
